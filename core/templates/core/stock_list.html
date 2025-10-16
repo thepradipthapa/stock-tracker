@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title%} Stock Tracker {% endblock %}
+
+
+{% block body%} 
+
+<div class="container mt-5">
+    <h1>Stock Tracker</h1>
+    <p>Select Your Favourite Stock: </p>
+    <form action="/live_stock_tracker/">
+        <label for="">Select Stock: </label>
+        <select class="form-select form-select-lg" multiple aria-label="Multiple select example" name="stocks">
+            {% for stock in stocks %}
+                <option value="{{ stock.symbol }}">{{ stock.name }}</option>
+            {% endfor %}
+            
+
+        </select>
+
+        <div class="d-grid gap-2 mt-5">
+            <input class="btn btn-primary" type="submit" value="Track Selected Stocks">
+        </div>
+    </form>
+</div>
+{% endblock %}

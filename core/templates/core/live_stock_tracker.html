@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title%} Live Stock Tracker {% endblock %}
+
+
+
+{% block body%} 
+
+<div class="container mt-5">
+    <h1>Live Stock Tracker</h1>
+    <p>Your Selected Favourite stocks</p>
+    <table class="table border">
+        <thead>
+            <tr>
+            <th scope="col">SN</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Price</th>
+            <th scope="col">Previous</th>
+            <th scope="col">Open</th>
+            <th scope="col">Low</th>
+            <th scope="col">High</th>
+            <th scope="col">Volume</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">Change</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stock_data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ stock.symbol }}</td>
+                    <td >{{ stock.price }}</td>
+                    <td>{{ stock.prev_close }}</td>
+                    <td>{{ stock.open }}</td>
+                    <td>{{ stock.low }}</td>
+                    <td>{{ stock.high }}</td>
+                    <td>{{ stock.volume }}</td>
+                    <td>{{ stock.market_cap }}</td>
+                    <td>
+                        {% if stock.price and stock.prev_close %}
+                            {% if stock.price > stock.prev_close %}
+                                <span style="color: green;">&#9650; {{ stock.price|floatformat:2|add:"-`stock.prev_close|floatformat:2`"|floatformat:2 }}</span>
+                            {% elif stock.price < stock.prev_close %}
+                                <span style="color: red;">&#9660; {{ stock.price|floatformat:2|add:"-`stock.prev_close|floatformat:2`"|floatformat:2 }}</span>
+                            {% else %}
+                                <span style="color: gray;">&#8212; 0.00</span>
+                            {% endif %}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
