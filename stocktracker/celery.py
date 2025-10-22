@@ -17,9 +17,10 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 
-app.conf.beat_schedule = {
-    'update-stock-data': {
-        'task': 'core.tasks.update_stock_data',
-        'schedule': timedelta(seconds=10)
-    },
-}
+# app.conf.beat_schedule = {
+#     'update-stock-data': {
+#         'task': 'core.tasks.update_stock_data',
+#         'schedule': timedelta(seconds=10),
+#         'args': (['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA'],)
+#     },
+# }

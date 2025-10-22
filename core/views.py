@@ -38,5 +38,8 @@ def live_stock_tracker(request):
             'market_cap': live_data.get('marketCap')
         })
 
-    context = {'stock_data': stock_data}
+    context = {
+        'stock_data': stock_data,
+        'room_name': 'track'
+    }
     return render(request, 'core/live_stock_tracker.html', context)
